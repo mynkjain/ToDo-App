@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
 //Establish the server connection with database
 //PORT ENVIRONMENT VARIABLE
-const PORT = 3000;
+const PORT = 8080;
 app.listen(PORT, () => {
     console.log(`Node.js server is listening at http://localhost:${PORT}`);
 });

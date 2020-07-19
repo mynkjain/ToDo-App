@@ -52,6 +52,47 @@ router.get('/:id', (req, res) => {
             } 
         }    
     });
-})
+});
+
+router.put("/:id", (req, res) => {
+    const id = req.params.id;
+    connection.query({
+        sql: "UPDATE tasks SET Title = ?, Description = ?, Status = ? WHERE ID = ? ",
+        values: [req.body.Title, req.body.Description ? req.body.Description:'', req.body.Status ? req.body.Status : '0', id]
+    }, function (error, results){
+        if(error){
+            res.status(404).send(error);
+            return;
+        }else{
+            res.status(200).send(results);
+        }    
+    });
+});
+
+router.delete("/:id",  (req, res) => {
+    const id = req.params.id;
+    connection.query({
+        sql: "DELETE FROM tasks WHERE ID = ? ",
+        values: [id]
+    }, function (error, results){
+        if(error){
+            res.status(404).send(error);
+            return;
+        }else{
+            res.status(200).send(results); 
+        }    
+    });
+});
+
+router.delete("/",  (req, res) => {
+    connection.query("DELETE FROM tasks WHERE 1", function (error, results){
+        if(error){
+            res.status(404).send(error);
+            return;
+        }else{
+            res.status(200).send(results); 
+        }    
+    });
+});
 
 module.exports = router
