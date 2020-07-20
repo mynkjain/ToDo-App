@@ -22,8 +22,8 @@ router.post('/', (req, res) => {
         return;
     }
     connection.query({
-        sql: "INSERT INTO tasks (Title, Description, Status) values (?, ?, ?)",
-        values: [req.body.Title, req.body.Description ? req.body.Description:'', req.body.Status ? req.body.Status : '0']
+        sql: "INSERT INTO tasks (Title, Status) values (?, ?)",
+        values: [req.body.Title, req.body.Status ? req.body.Status : '0']
     }, function (error, results){
         if(error){
             res.status(404).send(error);
@@ -57,8 +57,8 @@ router.get('/:id', (req, res) => {
 router.put("/:id", (req, res) => {
     const id = req.params.id;
     connection.query({
-        sql: "UPDATE tasks SET Title = ?, Description = ?, Status = ? WHERE ID = ? ",
-        values: [req.body.Title, req.body.Description ? req.body.Description:'', req.body.Status ? req.body.Status : '0', id]
+        sql: "UPDATE tasks SET Title = ?, Status = ? WHERE ID = ? ",
+        values: [req.body.Title, req.body.Status ? req.body.Status : '0', id]
     }, function (error, results){
         if(error){
             res.status(404).send(error);

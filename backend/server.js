@@ -4,6 +4,13 @@ const express = require('express')
 const bodyParser = require("body-parser");
 //Creating an express module object
 const app = express()
+const cors = require("cors");
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+
+app.use(cors(corsOptions));
 
 // create application/json parser
 app.use(bodyParser.json());
